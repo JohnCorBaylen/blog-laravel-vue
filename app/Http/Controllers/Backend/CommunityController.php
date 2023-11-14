@@ -20,8 +20,8 @@ class CommunityController extends Controller
         //     'name' => $community->name,
         //     'slug' => $community->slug,
         // ]);
-        // return Inertia::render('Communities/Index', compact('communities'));
-        return 'ok';
+        $communities = Community::all();
+        return Inertia::render('Communities/Index', compact('communities'));
     }
 
     /**
@@ -52,17 +52,18 @@ class CommunityController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Community $community)
     {
-        //
+        return Inertia::render('Communities/Edit', compact('community'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(CommunityStoreRequest $request, Community $community)
     {
-        //
+        $community->update($request->validated());
+        return to_route('communities.index');
     }
 
     /**

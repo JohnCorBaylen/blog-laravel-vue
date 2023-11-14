@@ -6,18 +6,15 @@ import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, useForm } from '@inertiajs/vue3';
 
-defineProps({
-    errors: Object,
+const props = defineProps({
+    community: Object,
+    errors: Object
 });
 
-const form = useForm({
-    name: '',
-    description: '',
-    slug: ''
-});
+const form = useForm(props.community);
 
 const submit = () => {
-    form.post(route('communities.store'));
+    form.put(route('communities.update', props.community.id));
 };
 
 </script>
@@ -37,14 +34,8 @@ const submit = () => {
                         <div>
                             <InputLabel for="name" value="Name" />
 
-                            <TextInput
-                                id="name"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.name"
-                                autofocus
-                                autocomplete="name"
-                            />
+                            <TextInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" autofocus
+                                autocomplete="name" />
 
                             <InputError class="mt-2" :message="form.errors.name" />
                         </div>
@@ -52,24 +43,16 @@ const submit = () => {
                         <div class="mt-4">
                             <InputLabel for="description" value="Description" />
 
-                            <TextInput
-                                id="description"
-                                type="text"
-                                class="mt-1 block w-full"
-                                v-model="form.description"
-                                autocomplete="description"
-                            />
+                            <TextInput id="description" type="text" class="mt-1 block w-full" v-model="form.description"
+                                autocomplete="description" />
 
                             <InputError class="mt-2" :message="form.errors.description" />
                         </div>
 
                         <div class="flex items-center justify-end mt-4">
-                            <PrimaryButton 
-                                class="ms-4" 
-                                :class="{ 'opacity-25': form.processing }" 
-                                :disabled="form.processing"
-                            >
-                                Store
+                            <PrimaryButton class="ms-4" :class="{ 'opacity-25': form.processing }"
+                                :disabled="form.processing">
+                                Update
                             </PrimaryButton>
                         </div>
                     </form>
