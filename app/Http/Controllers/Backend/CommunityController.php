@@ -63,14 +63,15 @@ class CommunityController extends Controller
     public function update(CommunityStoreRequest $request, Community $community)
     {
         $community->update($request->validated());
-        return to_route('communities.index');
+        return to_route('communities.index')->with('message', 'Community updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Community $community)
     {
-        //
+        $community->delete();
+        return back()->with('message', 'Community deleted successfully.');
     }
 }

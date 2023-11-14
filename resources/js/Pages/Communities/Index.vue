@@ -156,14 +156,14 @@ defineProps({
                                                     >
                                                         Edit
                                                     </Link>
-                                                    <!-- <Link
-                                                        :href="route('communities.destroy', community.slug)"
+                                                    <Link
+                                                        :href="route('communities.destroy', community.id)"
                                                         class="text-red-600 hover:text-red-900"
                                                         method="delete"
                                                         as="button"
                                                         type="button"
                                                         >Delete</Link
-                                                    > -->
+                                                    >
                                                 </td>
                                             </tr>
                                         </tbody>
