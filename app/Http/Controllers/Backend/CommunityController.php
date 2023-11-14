@@ -15,12 +15,12 @@ class CommunityController extends Controller
      */
     public function index()
     {
-        // $communities = Community::where('user_id', auth()->id())->paginate(5)->through(fn ($community) => [
-        //     'id' => $community->id,
-        //     'name' => $community->name,
-        //     'slug' => $community->slug,
-        // ]);
-        $communities = Community::all();
+        $communities = Community::where('user_id', auth()->id())->paginate(5)->through(fn ($community) => [
+            'id' => $community->id,
+            'name' => $community->name,
+            'slug' => $community->slug,
+        ]);
+        // $communities = Community::all();
         return Inertia::render('Communities/Index', compact('communities'));
     }
 

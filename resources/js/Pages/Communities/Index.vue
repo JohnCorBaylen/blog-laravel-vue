@@ -1,5 +1,6 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
+import Pagination from '../../Components/Pagination.vue';
 import { Head, Link } from '@inertiajs/vue3';
 
 defineProps({
@@ -103,7 +104,7 @@ defineProps({
                                         </thead>
                                         <tbody class="divide-y divide-gray-200 bg-white">
                                             <tr
-                                                v-for="community in communities"
+                                                v-for="community in communities.data"
                                                 :key="community.id"
                                             >
                                                 <td
@@ -168,9 +169,14 @@ defineProps({
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <!-- <div class="m-2 p-2">
+                                    <div class="m-2 p-2">
                                         <Pagination :links="communities.links" />
-                                    </div> -->
+                                        <!-- <Link v-for="community in communities.links" :key="community.id" 
+                                        :href="community.url"
+                                        >
+                                            {{ community.label }}
+                                        </Link> -->
+                                    </div>
                                 </div>
                             </div>
                         </div>
